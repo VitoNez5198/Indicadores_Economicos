@@ -126,7 +126,8 @@ cd indicadores-economicos-chile
 
     2. Crea y activa un entorno virtual:
 
-    ```# Windows
+    ```
+    # Windows
     python -m venv venv
     venv\Scripts\activate
 
@@ -138,7 +139,8 @@ cd indicadores-economicos-chile
 
     3. Instala las dependencias:
 
-    ```pip install -r requirements.txt
+    ```
+    pip install -r requirements.txt
     ```
 
 
@@ -146,7 +148,8 @@ cd indicadores-economicos-chile
 
     1. Abre ```psql``` y crea la base de datos:
 
-    ```psql -U postgres
+    ```
+    psql -U postgres
     CREATE DATABASE indicadores_db;
     \q
     ```
@@ -155,7 +158,8 @@ cd indicadores-economicos-chile
     2. Ejecuta el script de inicialización para crear las tablas y cargar los indicadores maestros.
     Asegúrate de estar en la carpeta raíz del proyecto (indicadores-economicos-chile/).
 
-    ```psql -U postgres -d indicadores_db -f database/__init__.sql
+    ```
+    psql -U postgres -d indicadores_db -f database/__init__.sql
     ```
 
 
@@ -167,7 +171,8 @@ cd indicadores-economicos-chile
 
     2. Copia y pega el siguiente contenido, reemplazando con tus credenciales:
 
-    ```# Base de datos
+    ```
+    # Base de datos
     DB_HOST=localhost
     DB_PORT=5432
     DB_NAME=indicadores_db
@@ -195,7 +200,8 @@ Debes tener dos terminales abiertas en la carpeta backend/ (ambas con el venv ac
 
 Este servidor "Mesero" debe estar siempre encendido para que el frontend funcione.
 
-```(venv) C:\...\backend> python run.py
+```
+(venv) C:\...\backend> python run.py
 ```
 
 
@@ -207,7 +213,8 @@ Este servidor "Mesero" debe estar siempre encendido para que el frontend funcion
 
 Este es el "Trabajador". Lo ejecutas una vez para poblar la base de datos.
 
-```(venv) C:\...\backend> python etl_job.py
+```
+(venv) C:\...\backend> python etl_job.py
 ```
 
 
@@ -251,7 +258,8 @@ La API REST expone los siguientes puntos de acceso:
 
 * Respuesta Exitosa (200):
 
-```{
+```
+{
   "status": "healthy",
   "database": "connected",
   "timestamp": "2025-11-05T15:30:00.123456"
@@ -265,7 +273,8 @@ La API REST expone los siguientes puntos de acceso:
 
 * **Respuesta Exitosa (200):**
 
-```[
+```
+[
   {
     "id": 1,
     "code": "dolar",
@@ -301,7 +310,8 @@ La API REST expone los siguientes puntos de acceso:
 
 * Respuesta Exitosa (200):
 
-```{
+```
+{
   "indicator": {
     "code": "dolar",
     "name": "Dolar observado",
