@@ -4,3 +4,37 @@
 2025-11-05 12:02:34 - test - INFO - Debug Mode: True
 2025-11-05 12:02:34 - test - INFO - ✓ Configuración OK
 2025-11-05 14:31:22 - run - ERROR - Error al iniciar la aplicación: cannot import name 'get_db' from 'app' (D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\__init__.py)
+2025-11-05 14:34:25 - app - ERROR - ✗ Error conectando a PostgreSQL: (psycopg2.OperationalError) could not translate host name "1995@localhost" to address: Non-recoverable failure in name resolution
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-11-05 14:34:25 - run - ERROR - Error al iniciar la aplicación: (psycopg2.OperationalError) could not translate host name "1995@localhost" to address: Non-recoverable failure in name resolution
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-11-05 14:36:52 - app - ERROR - ✗ Error conectando a PostgreSQL: (psycopg2.OperationalError) could not translate host name "1995@localhost" to address: Non-recoverable failure in name resolution
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-11-05 14:36:52 - run - ERROR - Error al iniciar la aplicación: (psycopg2.OperationalError) could not translate host name "1995@localhost" to address: Non-recoverable failure in name resolution
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-11-05 14:39:01 - app - ERROR - ✗ Error conectando a PostgreSQL: (psycopg2.OperationalError) could not translate host name "1995@localhost" to address: Non-recoverable failure in name resolution
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-11-05 14:39:01 - run - ERROR - Error al iniciar la aplicación: (psycopg2.OperationalError) could not translate host name "1995@localhost" to address: Non-recoverable failure in name resolution
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-11-05 14:39:13 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 14:39:13 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 14:39:13 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 14:39:13 - run - INFO - ==================================================
+2025-11-05 14:39:13 - run - INFO - Iniciando servidor Flask...
+2025-11-05 14:39:13 - run - INFO - URL: http://localhost:5000
+2025-11-05 14:39:13 - run - INFO - Presiona CTRL+C para detener
+2025-11-05 14:39:13 - run - INFO - ==================================================
+2025-11-05 14:39:14 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 14:39:14 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 14:39:14 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 14:39:14 - run - INFO - ==================================================
+2025-11-05 14:39:14 - run - INFO - Iniciando servidor Flask...
+2025-11-05 14:39:14 - run - INFO - URL: http://localhost:5000
+2025-11-05 14:39:14 - run - INFO - Presiona CTRL+C para detener
+2025-11-05 14:39:14 - run - INFO - ==================================================
