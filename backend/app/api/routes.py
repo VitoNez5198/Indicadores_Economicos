@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from sqlalchemy import desc, func
+from sqlalchemy import desc, func, text  # <-- 'text' es necesario
 from app import get_db
 from app.models import Indicator, IndicatorValue
 from app.utils.logger import setup_logger
@@ -193,7 +193,8 @@ def health_check():
     try:
         db = get_db()
         # Probar conexión a DB
-        db.execute('SELECT 1')
+        # AQUÍ ESTÁ EL ARREGLO:
+        db.execute(text('SELECT 1'))
         db.close()
         
         return jsonify({
@@ -202,6 +203,8 @@ def health_check():
             'timestamp': datetime.now().isoformat()
         }), 200
     except Exception as e:
+        # El error ahora será capturado aquí si falla
+        logger.error(f"Error en health_check: {e}") 
         return jsonify({
             'status': 'unhealthy',
             'error': str(e),
