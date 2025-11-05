@@ -57,7 +57,8 @@ El sistema se divide en dos procesos independientes que solo se comunican a trav
 
 ## Estructura del Proyecto
 
-```indicadores-economicos-chile/
+```
+indicadores-economicos-chile/
 ├── backend/
 │   ├── app/
 │   │   ├── api/
@@ -111,7 +112,8 @@ Sigue estos pasos para levantar el proyecto en tu máquina local.
 
 2. Clonar el Repositorio
 
-```git clone [https://github.com/VitoNez5198/Indicadores_Economicos.git](https://github.com/VitoNez5198/Indicadores_Economicos.git)
+```
+git clone [https://github.com/VitoNez5198/Indicadores_Economicos.git](https://github.com/VitoNez5198/Indicadores_Economicos.git)
 cd indicadores-economicos-chile
 ```
 
@@ -120,7 +122,8 @@ cd indicadores-economicos-chile
 
     1. Navega al backend:
 
-    ```cd backend
+    ```
+    cd backend
     ```
 
 
