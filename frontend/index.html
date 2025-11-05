@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicadores Económicos Chile</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Chart.js desde CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="header-title">📊 Indicadores Económicos Chile</h1>
+            <p class="header-subtitle">Datos en tiempo real del mercado chileno</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Loading State -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Cargando indicadores...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error" class="error hidden">
+            <p>❌ Error al cargar los datos. Verifica que el backend esté corriendo.</p>
+            <button onclick="location.reload()" class="btn-retry">Reintentar</button>
+        </div>
+
+        <!-- Stats Cards Section -->
+        <section id="stats-section" class="stats-section hidden">
+            <h2 class="section-title">Últimos Valores</h2>
+            <div id="stats-cards" class="stats-grid">
+                <!-- Cards se generan dinámicamente con JS -->
+            </div>
+        </section>
+
+        <!-- Chart Section -->
+        <section id="chart-section" class="chart-section hidden">
+            <div class="chart-header">
+                <h2 class="section-title">Histórico de Indicadores</h2>
+                <div class="chart-controls">
+                    <select id="indicator-select" class="select">
+                        <option value="">Selecciona un indicador</option>
+                    </select>
+                    <select id="days-select" class="select">
+                        <option value="7">Últimos 7 días</option>
+                        <option value="30" selected>Últimos 30 días</option>
+                        <option value="90">Últimos 90 días</option>
+                    </select>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="main-chart"></canvas>
+            </div>
+        </section>
+
+        <!-- Table Section -->
+        <section id="table-section" class="table-section hidden">
+            <h2 class="section-title">Todos los Indicadores</h2>
+            <div class="table-wrapper">
+                <table id="indicators-table" class="table">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Valor</th>
+                            <th>Unidad</th>
+                            <th>Fecha</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Rows se generan dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Datos obtenidos de <a href="https://mindicador.cl" target="_blank">mindicador.cl</a></p>
+            <p>Última actualización: <span id="last-update">-</span></p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
