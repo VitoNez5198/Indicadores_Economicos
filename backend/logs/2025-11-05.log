@@ -138,3 +138,5 @@
 2025-11-05 15:31:33 - run - INFO - URL: http://localhost:5000
 2025-11-05 15:31:33 - run - INFO - Presiona CTRL+C para detener
 2025-11-05 15:31:33 - run - INFO - ==================================================
+2025-11-05 15:36:34 - extractor - INFO - Iniciando extracción de datos desde: https://mindicador.cl/api
+2025-11-05 15:36:39 - extractor - INFO - Datos extraídos exitosamente.
