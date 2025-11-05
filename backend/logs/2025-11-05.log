@@ -1,0 +1,5 @@
+2025-11-05 12:02:34 - test - INFO - === Probando Configuración ===
+2025-11-05 12:02:34 - test - INFO - Database URI: postgresql://postgres:Trevor@1995@localhost:5432/indicadores_db
+2025-11-05 12:02:34 - test - INFO - API URL: https://mindicador.cl/api
+2025-11-05 12:02:34 - test - INFO - Debug Mode: True
+2025-11-05 12:02:34 - test - INFO - ✓ Configuración OK
