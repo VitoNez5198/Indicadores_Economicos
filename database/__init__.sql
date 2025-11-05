@@ -42,11 +42,11 @@ ORDER BY i.code, iv.date DESC NULLS LAST;
 
 -- Insertar indicadores iniciales
 INSERT INTO indicators (code, name, unit) VALUES
-('dolar', 'Dólar observado', 'CLP'),
+('dolar', 'Dolar observado', 'CLP'),
 ('uf', 'Unidad de Fomento (UF)', 'CLP'),
 ('euro', 'Euro', 'CLP'),
 ('utm', 'Unidad Tributaria Mensual (UTM)', 'CLP'),
-('ipc', 'Índice de Precios al Consumidor (IPC)', '%'),
+('ipc', 'Indice de Precios al Consumidor (IPC)', '%'),
 ('bitcoin', 'Bitcoin', 'USD');
 
 -- Confirmar creación
