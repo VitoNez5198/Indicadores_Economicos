@@ -14,9 +14,9 @@ Consiste en dos componentes principales que trabajan juntos:
 
 El sistema se divide en dos procesos independientes que solo se comunican a través de la base de datos:
 
-1. El "Trabajador" (ETL): Un script (etl_job.py) que se conecta a la API externa, limpia los datos y los escribe en la base de datos.
+1. Proceso ETL (Ingesta de Datos): Un script (etl_job.py) que se conecta a la API externa, limpia los datos y los escribe en la base de datos.
 
-2. El "Mesero" (API): Un servidor web (run.py) que escucha peticiones del frontend, lee la base de datos y responde con los datos en formato JSON.
+2. Servidor API (Backend): Un servidor web (run.py) que escucha peticiones del frontend, lee la base de datos y responde con los datos en formato JSON.
 
 (Aquí puedes insertar tu Diagrama General de Arquitectura hecho en Draw.io)
 
@@ -85,8 +85,13 @@ El sistema se divide en dos procesos independientes que solo se comunican a trav
 │
 ├── frontend/
 │   ├── index.html                # La aplicación web de una sola página (SPA)
-│   └── (css/ y js/ no usados, todo está en index.html)
-│
+│   ├── css/
+│   │   └── styles.css            # Estilos
+│   ├── js/
+│   │   ├── api.js                # Lógica de conexión con el Backend
+│   │   ├── charts.js             # Lógica de renderizado de gráficos
+│   │   └── main.js               # Lógica principal de la aplicación
+│   └── assets/                   # (Opcional) Imágenes o íconos
 ├── logs/                         # Carpeta donde se guardan los logs (ignorada por .git)
 ├── .gitignore
 └── README.md                     <-- ¡Estás aquí!
@@ -98,11 +103,11 @@ Sigue estos pasos para levantar el proyecto en tu máquina local.
 
 1. Prerrequisitos
 
-* Tener Python 3.9+ instalado.
+    * Tener Python 3.9+ instalado.
 
-* Tener PostgreSQL instalado y corriendo.
+    * Tener PostgreSQL instalado y corriendo.
 
-* Tener Git instalado.
+    * Tener Git instalado.
 
 2. Clonar el Repositorio
 
