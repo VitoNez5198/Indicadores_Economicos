@@ -3,3 +3,4 @@
 2025-11-05 12:02:34 - test - INFO - API URL: https://mindicador.cl/api
 2025-11-05 12:02:34 - test - INFO - Debug Mode: True
 2025-11-05 12:02:34 - test - INFO - ✓ Configuración OK
+2025-11-05 14:31:22 - run - ERROR - Error al iniciar la aplicación: cannot import name 'get_db' from 'app' (D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\__init__.py)
