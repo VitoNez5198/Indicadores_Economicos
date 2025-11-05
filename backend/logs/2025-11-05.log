@@ -195,3 +195,19 @@
 2025-11-05 15:50:22 - run - INFO - URL: http://localhost:5000
 2025-11-05 15:50:22 - run - INFO - Presiona CTRL+C para detener
 2025-11-05 15:50:22 - run - INFO - ==================================================
+2025-11-05 20:45:09 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 20:45:09 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 20:45:09 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 20:45:09 - run - INFO - ==================================================
+2025-11-05 20:45:09 - run - INFO - Iniciando servidor Flask...
+2025-11-05 20:45:09 - run - INFO - URL: http://localhost:5000
+2025-11-05 20:45:09 - run - INFO - Presiona CTRL+C para detener
+2025-11-05 20:45:09 - run - INFO - ==================================================
+2025-11-05 20:45:10 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 20:45:10 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 20:45:10 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 20:45:10 - run - INFO - ==================================================
+2025-11-05 20:45:10 - run - INFO - Iniciando servidor Flask...
+2025-11-05 20:45:10 - run - INFO - URL: http://localhost:5000
+2025-11-05 20:45:10 - run - INFO - Presiona CTRL+C para detener
+2025-11-05 20:45:10 - run - INFO - ==================================================
