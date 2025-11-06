@@ -1,4 +1,3 @@
-import json
 from datetime import datetime
 from decimal import Decimal, InvalidOperation
 from app.utils.logger import setup_logger
@@ -9,16 +8,7 @@ logger = setup_logger('transformer')
 
 def transform_data(raw_data: dict) -> list:
     """
-    Transforma los datos crudos del extractor en una lista
-    de diccionarios limpios, listos para el 'loader'.
-    
-    Args:
-        raw_data (dict): El diccionario crudo de fetch_all_indicators().
-                         Ej: {'dolar': {'valor': 123.45, 'fecha': '...'}, ...}
-
-    Returns:
-        list: Lista de diccionarios limpios.
-              Ej: [{'code': 'dolar', 'value': Decimal('123.45'), 'date': date(2025, 11, 5)}, ...]
+    Transforma los datos crudos (solo valores actuales)
     """
     transformed_list = []
     
@@ -38,15 +28,10 @@ def transform_data(raw_data: dict) -> list:
             # 2. Transformar 'valor' a Decimal
             # El valor puede venir como string con coma (ej: "37.500,50")
             # Lo limpiamos: quitamos puntos (miles) y cambiamos coma por punto (decimal)
-            value_str = str(details['valor']).replace('.', '').replace(',', '.')
             value = Decimal(str(details['valor']))
-
-            # 3. Transformar 'fecha' a objeto date
-            # El formato de la API es ISO 8601 (ej: "2025-11-05T14:00:00.000Z")
             date_iso = details['fecha']
             date = datetime.fromisoformat(date_iso.replace('Z', '+00:00')).date()
 
-            # 4. Crear el diccionario limpio
             clean_item = {
                 'code': code,
                 'value': value,
@@ -54,44 +39,70 @@ def transform_data(raw_data: dict) -> list:
             }
             transformed_list.append(clean_item)
 
-        except InvalidOperation as e:
-            logger.error(f"Error al convertir valor '{details.get('valor')}' a Decimal para '{code}': {e}")
-        except ValueError as e:
-            logger.error(f"Error al convertir fecha '{details.get('fecha')}' a Date para '{code}': {e}")
         except Exception as e:
             logger.error(f"Error inesperado transformando '{code}': {e}", exc_info=True)
 
     logger.info(f"Transformación completada. {len(transformed_list)} indicadores listos para cargar.")
     return transformed_list
 
+def transform_historical_data(historical_data: dict) -> list:
+    """
+    Transforma datos históricos de múltiples indicadores.
+    
+    Args:
+        historical_data: {
+            'dolar': [{'fecha': '...', 'valor': 950}, ...],
+            'uf': [{'fecha': '...', 'valor': 37500}, ...]
+        }
+    
+    Returns:
+        list: [
+            {'code': 'dolar', 'value': Decimal('950'), 'date': date(...)},
+            ...
+        ]
+    """
+    transformed_list = []
+    
+    if not historical_data:
+        logger.warning("No hay datos históricos para transformar")
+        return transformed_list
+    
+    logger.info(f"Transformando histórico de {len(historical_data)} indicadores...")
+    
+    for code, history in historical_data.items():
+        for entry in history:
+            try:
+                value = Decimal(str(entry['valor']))
+                date_iso = entry['fecha']
+                date = datetime.fromisoformat(date_iso.replace('Z', '+00:00')).date()
+                
+                clean_item = {
+                    'code': code,
+                    'value': value,
+                    'date': date
+                }
+                transformed_list.append(clean_item)
+                
+            except Exception as e:
+                logger.error(f"Error transformando entrada de '{code}': {e}")
+                continue
+    
+    logger.info(f"Transformación histórica completada. {len(transformed_list)} registros listos.")
+    return transformed_list
 # --- Bloque de Auto-Test ---
 # Esto se ejecutará solo cuando corras el archivo directamente
 if __name__ == "__main__":
+    from app.services.extractor import fetch_all_indicators_with_history
     
-    print("Iniciando prueba del Transformador (depende del Extractor)...")
+    print("Probando transformer con histórico...")
     
-    # 1. Extraer datos (como hicimos antes)
-    print("\n--- Paso 1: Extrayendo Datos ---")
-    raw_data = fetch_all_indicators()
+    raw_data = fetch_all_indicators_with_history(days=7)
     
-    if not raw_data:
-        print("[FALLO] El extractor no pudo obtener datos.")
+    if raw_data:
+        clean_data = transform_historical_data(raw_data)
+        print(f"\n✓ Se transformaron {len(clean_data)} registros")
+        print("\nPrimeros 3 registros:")
+        for item in clean_data[:3]:
+            print(f"  {item['code']}: ${item['value']} ({item['date']})")
     else:
-        print(f"[ÉXITO] Extractor obtuvo {len(raw_data)} indicadores.")
-        
-        # 2. Transformar los datos
-        print("\n--- Paso 2: Transformando Datos ---")
-        clean_data = transform_data(raw_data)
-        
-        if clean_data:
-            print(f"[ÉXITO] Se transformaron {len(clean_data)} indicadores.")
-            
-            # Imprimir el primero para verificar
-            print("\n--- Muestra de datos transformados ---")
-            first_item = clean_data[0]
-            print(f"  Código: {first_item['code']}")
-            print(f"  Valor: {first_item['value']} (Tipo: {type(first_item['value'])})")
-            print(f"  Fecha: {first_item['date']} (Tipo: {type(first_item['date'])})")
-            print("-" * 20)
-        else:
-            print("\n[FALLO] No se pudieron transformar los datos.")
+        print("\n✗ No se pudieron obtener datos")
