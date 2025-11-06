@@ -274,3 +274,318 @@
 2025-11-05 21:00:01 - run - INFO - URL: http://localhost:5000
 2025-11-05 21:00:01 - run - INFO - Presiona CTRL+C para detener
 2025-11-05 21:00:01 - run - INFO - ==================================================
+2025-11-05 21:16:22 - etl_job - INFO - Creando contexto de aplicación Flask para el ETL...
+2025-11-05 21:16:22 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 21:16:22 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:16:22 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:16:22 - etl_job - INFO - =============================================
+2025-11-05 21:16:22 - etl_job - INFO - INICIANDO ETL CON HISTÓRICO (90 días)
+2025-11-05 21:16:22 - etl_job - INFO - =============================================
+2025-11-05 21:16:22 - etl_job - INFO - --- PASO 1: EXTRACCIÓN CON HISTORICO---
+2025-11-05 21:16:22 - extractor - INFO - Iniciando extracción de datos desde: https://mindicador.cl/api
+2025-11-05 21:16:23 - extractor - INFO - Datos extraídos exitosamente.
+2025-11-05 21:16:23 - extractor - INFO - Obteniendo histórico de 'uf' (90 días)
+2025-11-05 21:16:25 - extractor - ERROR - Error obteniendo histórico de uf: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:16:25 - extractor - INFO - Obteniendo histórico de 'ivp' (90 días)
+2025-11-05 21:16:26 - extractor - ERROR - Error obteniendo histórico de ivp: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:16:26 - extractor - INFO - Obteniendo histórico de 'dolar' (90 días)
+2025-11-05 21:16:27 - extractor - ERROR - Error obteniendo histórico de dolar: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:16:27 - extractor - INFO - Obteniendo histórico de 'dolar_intercambio' (90 días)
+2025-11-05 21:16:28 - extractor - ERROR - Error obteniendo histórico de dolar_intercambio: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:16:28 - extractor - INFO - Obteniendo histórico de 'euro' (90 días)
+2025-11-05 21:16:29 - extractor - ERROR - Error obteniendo histórico de euro: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:16:29 - extractor - INFO - Obteniendo histórico de 'ipc' (90 días)
+2025-11-05 21:16:30 - extractor - ERROR - Error obteniendo histórico de ipc: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:16:30 - extractor - INFO - Obteniendo histórico de 'utm' (90 días)
+2025-11-05 21:16:31 - extractor - ERROR - Error obteniendo histórico de utm: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:16:31 - extractor - INFO - Obteniendo histórico de 'imacec' (90 días)
+2025-11-05 21:16:32 - extractor - ERROR - Error obteniendo histórico de imacec: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:16:32 - extractor - INFO - Obteniendo histórico de 'tpm' (90 días)
+2025-11-05 21:16:33 - extractor - ERROR - Error obteniendo histórico de tpm: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:16:33 - extractor - INFO - Obteniendo histórico de 'libra_cobre' (90 días)
+2025-11-05 21:16:34 - extractor - ERROR - Error obteniendo histórico de libra_cobre: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:16:34 - extractor - INFO - Obteniendo histórico de 'tasa_desempleo' (90 días)
+2025-11-05 21:16:35 - extractor - ERROR - Error obteniendo histórico de tasa_desempleo: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:16:35 - extractor - INFO - Obteniendo histórico de 'bitcoin' (90 días)
+2025-11-05 21:16:36 - extractor - ERROR - Error obteniendo histórico de bitcoin: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:16:36 - etl_job - ERROR - Extracción fallida. Abortando ETL.
+2025-11-05 21:18:01 - etl_job - INFO - Creando contexto de aplicación Flask para el ETL...
+2025-11-05 21:18:01 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 21:18:01 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:18:01 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:18:01 - etl_job - INFO - =============================================
+2025-11-05 21:18:01 - etl_job - INFO - INICIANDO ETL CON HISTÓRICO (90 días)
+2025-11-05 21:18:01 - etl_job - INFO - =============================================
+2025-11-05 21:18:01 - etl_job - INFO - --- PASO 1: EXTRACCIÓN CON HISTORICO---
+2025-11-05 21:18:01 - extractor - INFO - Iniciando extracción de datos desde: https://mindicador.cl/api
+2025-11-05 21:18:02 - extractor - INFO - Datos extraídos exitosamente.
+2025-11-05 21:18:02 - extractor - INFO - Obteniendo histórico de 'uf' (90 días)
+2025-11-05 21:18:03 - extractor - ERROR - Error obteniendo histórico de uf: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:18:03 - extractor - INFO - Obteniendo histórico de 'ivp' (90 días)
+2025-11-05 21:18:04 - extractor - ERROR - Error obteniendo histórico de ivp: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:18:04 - extractor - INFO - Obteniendo histórico de 'dolar' (90 días)
+2025-11-05 21:18:05 - extractor - ERROR - Error obteniendo histórico de dolar: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:18:05 - extractor - INFO - Obteniendo histórico de 'dolar_intercambio' (90 días)
+2025-11-05 21:18:06 - extractor - ERROR - Error obteniendo histórico de dolar_intercambio: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:18:06 - extractor - INFO - Obteniendo histórico de 'euro' (90 días)
+2025-11-05 21:18:08 - extractor - ERROR - Error obteniendo histórico de euro: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:18:08 - extractor - INFO - Obteniendo histórico de 'ipc' (90 días)
+2025-11-05 21:18:09 - extractor - ERROR - Error obteniendo histórico de ipc: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:18:09 - extractor - INFO - Obteniendo histórico de 'utm' (90 días)
+2025-11-05 21:18:10 - extractor - ERROR - Error obteniendo histórico de utm: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:18:10 - extractor - INFO - Obteniendo histórico de 'imacec' (90 días)
+2025-11-05 21:18:11 - extractor - ERROR - Error obteniendo histórico de imacec: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:18:11 - extractor - INFO - Obteniendo histórico de 'tpm' (90 días)
+2025-11-05 21:18:12 - extractor - ERROR - Error obteniendo histórico de tpm: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:18:12 - extractor - INFO - Obteniendo histórico de 'libra_cobre' (90 días)
+2025-11-05 21:18:13 - extractor - ERROR - Error obteniendo histórico de libra_cobre: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:18:13 - extractor - INFO - Obteniendo histórico de 'tasa_desempleo' (90 días)
+2025-11-05 21:18:14 - extractor - ERROR - Error obteniendo histórico de tasa_desempleo: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:18:14 - extractor - INFO - Obteniendo histórico de 'bitcoin' (90 días)
+2025-11-05 21:18:15 - extractor - ERROR - Error obteniendo histórico de bitcoin: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "D:\Escritorio\Curso Python\GitHub\indicadores-economicos-chile\backend\app\services\extractor.py", line 90, in fetch_indicator_history
+    if entry_date >= cutoff_date:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-05 21:18:15 - etl_job - ERROR - Extracción fallida. Abortando ETL.
+2025-11-05 21:18:51 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 21:18:51 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:18:51 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:18:51 - run - INFO - ==================================================
+2025-11-05 21:18:51 - run - INFO - Iniciando servidor Flask...
+2025-11-05 21:18:51 - run - INFO - URL: http://localhost:5000
+2025-11-05 21:18:51 - run - INFO - Presiona CTRL+C para detener
+2025-11-05 21:18:51 - run - INFO - ==================================================
+2025-11-05 21:18:52 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 21:18:52 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:18:52 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:18:52 - run - INFO - ==================================================
+2025-11-05 21:18:52 - run - INFO - Iniciando servidor Flask...
+2025-11-05 21:18:52 - run - INFO - URL: http://localhost:5000
+2025-11-05 21:18:52 - run - INFO - Presiona CTRL+C para detener
+2025-11-05 21:18:52 - run - INFO - ==================================================
+2025-11-05 21:32:05 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 21:32:05 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:32:05 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:32:05 - run - INFO - ==================================================
+2025-11-05 21:32:05 - run - INFO - Iniciando servidor Flask...
+2025-11-05 21:32:05 - run - INFO - URL: http://localhost:5000
+2025-11-05 21:32:05 - run - INFO - Presiona CTRL+C para detener
+2025-11-05 21:32:05 - run - INFO - ==================================================
+2025-11-05 21:34:10 - etl_job - INFO - Creando contexto de aplicación Flask para el ETL...
+2025-11-05 21:34:10 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 21:34:10 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:34:10 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:34:10 - etl_job - INFO - =============================================
+2025-11-05 21:34:10 - etl_job - INFO - INICIANDO PROCESO ETL HISTÓRICO...
+2025-11-05 21:34:10 - etl_job - INFO - Se procesarán 6 indicadores.
+2025-11-05 21:34:10 - etl_job - INFO - =============================================
+2025-11-05 21:34:10 - etl_job - INFO - --- Procesando: DOLAR ---
+2025-11-05 21:34:10 - extractor - INFO - Iniciando extracción de historial para 'dolar' desde: https://mindicador.cl/api/dolar
+2025-11-05 21:34:11 - extractor - INFO - Datos históricos de 'dolar' extraídos exitosamente.
+2025-11-05 21:34:11 - transformer - INFO - Transformando 31 registros para 'dolar'...
+2025-11-05 21:34:11 - transformer - INFO - Transformación completada para 'dolar'. 31 registros listos.
+2025-11-05 21:34:11 - loader - INFO - Iniciando carga de 31 registros...
+2025-11-05 21:34:11 - loader - INFO - Carga de datos completada exitosamente.
+2025-11-05 21:34:11 - loader - INFO - Registros nuevos/actualizados: 31
+2025-11-05 21:34:11 - loader - INFO - Registros omitidos (duplicados): 0
+2025-11-05 21:34:11 - loader - INFO - Sesión de base de datos cerrada.
+2025-11-05 21:34:11 - etl_job - INFO - Proceso de carga finalizado para 'dolar'.
+2025-11-05 21:34:11 - etl_job - INFO - --- Fin de DOLAR ---
+2025-11-05 21:34:11 - etl_job - INFO - --- Procesando: UF ---
+2025-11-05 21:34:11 - extractor - INFO - Iniciando extracción de historial para 'uf' desde: https://mindicador.cl/api/uf
+2025-11-05 21:34:12 - extractor - INFO - Datos históricos de 'uf' extraídos exitosamente.
+2025-11-05 21:34:12 - transformer - INFO - Transformando 31 registros para 'uf'...
+2025-11-05 21:34:12 - transformer - INFO - Transformación completada para 'uf'. 31 registros listos.
+2025-11-05 21:34:12 - loader - INFO - Iniciando carga de 31 registros...
+2025-11-05 21:34:12 - loader - INFO - Carga de datos completada exitosamente.
+2025-11-05 21:34:12 - loader - INFO - Registros nuevos/actualizados: 31
+2025-11-05 21:34:12 - loader - INFO - Registros omitidos (duplicados): 0
+2025-11-05 21:34:12 - loader - INFO - Sesión de base de datos cerrada.
+2025-11-05 21:34:12 - etl_job - INFO - Proceso de carga finalizado para 'uf'.
+2025-11-05 21:34:12 - etl_job - INFO - --- Fin de UF ---
+2025-11-05 21:34:12 - etl_job - INFO - --- Procesando: EURO ---
+2025-11-05 21:34:12 - extractor - INFO - Iniciando extracción de historial para 'euro' desde: https://mindicador.cl/api/euro
+2025-11-05 21:34:13 - extractor - INFO - Datos históricos de 'euro' extraídos exitosamente.
+2025-11-05 21:34:13 - transformer - INFO - Transformando 31 registros para 'euro'...
+2025-11-05 21:34:13 - transformer - INFO - Transformación completada para 'euro'. 31 registros listos.
+2025-11-05 21:34:13 - loader - INFO - Iniciando carga de 31 registros...
+2025-11-05 21:34:13 - loader - INFO - Carga de datos completada exitosamente.
+2025-11-05 21:34:13 - loader - INFO - Registros nuevos/actualizados: 31
+2025-11-05 21:34:13 - loader - INFO - Registros omitidos (duplicados): 0
+2025-11-05 21:34:13 - loader - INFO - Sesión de base de datos cerrada.
+2025-11-05 21:34:13 - etl_job - INFO - Proceso de carga finalizado para 'euro'.
+2025-11-05 21:34:13 - etl_job - INFO - --- Fin de EURO ---
+2025-11-05 21:34:13 - etl_job - INFO - --- Procesando: UTM ---
+2025-11-05 21:34:13 - extractor - INFO - Iniciando extracción de historial para 'utm' desde: https://mindicador.cl/api/utm
+2025-11-05 21:34:14 - extractor - INFO - Datos históricos de 'utm' extraídos exitosamente.
+2025-11-05 21:34:14 - transformer - INFO - Transformando 31 registros para 'utm'...
+2025-11-05 21:34:14 - transformer - INFO - Transformación completada para 'utm'. 31 registros listos.
+2025-11-05 21:34:14 - loader - INFO - Iniciando carga de 31 registros...
+2025-11-05 21:34:15 - loader - INFO - Carga de datos completada exitosamente.
+2025-11-05 21:34:15 - loader - INFO - Registros nuevos/actualizados: 31
+2025-11-05 21:34:15 - loader - INFO - Registros omitidos (duplicados): 0
+2025-11-05 21:34:15 - loader - INFO - Sesión de base de datos cerrada.
+2025-11-05 21:34:15 - etl_job - INFO - Proceso de carga finalizado para 'utm'.
+2025-11-05 21:34:15 - etl_job - INFO - --- Fin de UTM ---
+2025-11-05 21:34:15 - etl_job - INFO - --- Procesando: IPC ---
+2025-11-05 21:34:15 - extractor - INFO - Iniciando extracción de historial para 'ipc' desde: https://mindicador.cl/api/ipc
+2025-11-05 21:34:16 - extractor - INFO - Datos históricos de 'ipc' extraídos exitosamente.
+2025-11-05 21:34:16 - transformer - INFO - Transformando 31 registros para 'ipc'...
+2025-11-05 21:34:16 - transformer - INFO - Transformación completada para 'ipc'. 31 registros listos.
+2025-11-05 21:34:16 - loader - INFO - Iniciando carga de 31 registros...
+2025-11-05 21:34:16 - loader - INFO - Carga de datos completada exitosamente.
+2025-11-05 21:34:16 - loader - INFO - Registros nuevos/actualizados: 31
+2025-11-05 21:34:16 - loader - INFO - Registros omitidos (duplicados): 0
+2025-11-05 21:34:16 - loader - INFO - Sesión de base de datos cerrada.
+2025-11-05 21:34:16 - etl_job - INFO - Proceso de carga finalizado para 'ipc'.
+2025-11-05 21:34:16 - etl_job - INFO - --- Fin de IPC ---
+2025-11-05 21:34:16 - etl_job - INFO - --- Procesando: BITCOIN ---
+2025-11-05 21:34:16 - extractor - INFO - Iniciando extracción de historial para 'bitcoin' desde: https://mindicador.cl/api/bitcoin
+2025-11-05 21:34:17 - extractor - INFO - Datos históricos de 'bitcoin' extraídos exitosamente.
+2025-11-05 21:34:17 - transformer - INFO - Transformando 31 registros para 'bitcoin'...
+2025-11-05 21:34:17 - transformer - INFO - Transformación completada para 'bitcoin'. 31 registros listos.
+2025-11-05 21:34:17 - loader - INFO - Iniciando carga de 31 registros...
+2025-11-05 21:34:17 - loader - INFO - Carga de datos completada exitosamente.
+2025-11-05 21:34:17 - loader - INFO - Registros nuevos/actualizados: 31
+2025-11-05 21:34:17 - loader - INFO - Registros omitidos (duplicados): 0
+2025-11-05 21:34:17 - loader - INFO - Sesión de base de datos cerrada.
+2025-11-05 21:34:17 - etl_job - INFO - Proceso de carga finalizado para 'bitcoin'.
+2025-11-05 21:34:17 - etl_job - INFO - --- Fin de BITCOIN ---
+2025-11-05 21:34:17 - etl_job - INFO - =============================================
+2025-11-05 21:34:17 - etl_job - INFO - PROCESO ETL HISTÓRICO FINALIZADO.
+2025-11-05 21:34:17 - etl_job - INFO - Total de indicadores procesados con éxito (aprox): 6
+2025-11-05 21:34:17 - etl_job - INFO - Total de indicadores fallidos: 0
+2025-11-05 21:34:17 - etl_job - INFO - =============================================
+2025-11-05 21:34:21 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 21:34:21 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:34:21 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:34:21 - run - INFO - ==================================================
+2025-11-05 21:34:21 - run - INFO - Iniciando servidor Flask...
+2025-11-05 21:34:21 - run - INFO - URL: http://localhost:5000
+2025-11-05 21:34:21 - run - INFO - Presiona CTRL+C para detener
+2025-11-05 21:34:21 - run - INFO - ==================================================
+2025-11-05 21:34:22 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 21:34:22 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:34:22 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:34:22 - run - INFO - ==================================================
+2025-11-05 21:34:22 - run - INFO - Iniciando servidor Flask...
+2025-11-05 21:34:22 - run - INFO - URL: http://localhost:5000
+2025-11-05 21:34:22 - run - INFO - Presiona CTRL+C para detener
+2025-11-05 21:34:22 - run - INFO - ==================================================

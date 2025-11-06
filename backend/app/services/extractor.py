@@ -1,147 +1,69 @@
-from datetime import datetime, timedelta
 import requests
 import json
 from app.config import Config
 from app.utils.logger import setup_logger
 
-# Configurar logger para este módulo
 logger = setup_logger('extractor')
 
-# Definir llaves de metadata que no son indicadores
-METADATA_KEYS = ["version", "autor", "fecha"]
+# OJO: La URL base ahora termina en /
+MINDICADOR_API_BASE_URL = Config.MINDICADOR_API_URL.rstrip('/') + '/'
 
-def fetch_all_indicators():
+def fetch_indicator_history(indicator_code: str) -> dict:
     """
-    Se conecta a la API de Mindicador y obtiene todos los indicadores.
-    
-    Filtra la metadata (version, autor, fecha) y devuelve
-    un diccionario solo con los datos de los indicadores.
-    
-    Retorna:
-        dict: Un diccionario donde cada llave es un indicador (ej: 'dolar')
-            y su valor es otro diccionario con sus detalles.
-        None: Si ocurre un error en la extracción.
-    """
-    api_url = Config.MINDICADOR_API_URL
-    logger.info(f"Iniciando extracción de datos desde: {api_url}")
-
-    try:
-        # Hacemos el request con un timeout de 10 segundos
-        response = requests.get(api_url, timeout=10)
-        
-        # Verificar si la respuesta fue exitosa (código 200)
-        response.raise_for_status() 
-        
-        logger.info("Datos extraídos exitosamente.")
-        
-        # Convertir la respuesta a JSON
-        data = response.json()
-        
-        # Filtrar la metadata y devolver solo los indicadores
-        indicators_data = {
-            key: value for key, value in data.items() 
-            if key not in METADATA_KEYS and isinstance(value, dict)
-        }
-        
-        if not indicators_data:
-            logger.warning("La API no devolvió indicadores, solo metadata.")
-            return None
-            
-        return indicators_data
-
-    except Exception as e:
-        logger.error(f"Error inesperado en el extractor: {e}", exc_info=True)
-        return None
-
-
-def fetch_indicator_history(indicator_code, days=90):
-    """
-    Obtiene el histórico de un indicador específico.
+    Se conecta a la API de Mindicador y obtiene el historial
+    COMPLETO de un indicador específico.
     
     Args:
-        indicator_code (str): Código del indicador ('dolar', 'uf', etc.)
-        days (int): Cantidad de días hacia atrás (máximo 365)
-    
-    Returns:
-        list: Lista de diccionarios con 'fecha' y 'valor'
-        None: Si ocurre un error
+        indicator_code (str): El código del indicador (ej: 'dolar', 'uf')
+
+    Retorna:
+        dict: Un diccionario con los datos del indicador, o None si falla.
+              Ej: {'codigo': 'dolar', 'nombre': '...', 'serie': [{'fecha': '...', 'valor': ...}, ...]}
     """
-    api_url = f"{Config.MINDICADOR_API_URL}/{indicator_code}"
-    logger.info(f"Obteniendo histórico de '{indicator_code}' ({days} días)")
-    
+    api_url = f"{MINDICADOR_API_BASE_URL}{indicator_code}"
+    logger.info(f"Iniciando extracción de historial para '{indicator_code}' desde: {api_url}")
+
     try:
-        response = requests.get(api_url, timeout=10)
+        response = requests.get(api_url, timeout=20) # Timeout más largo para historial
         response.raise_for_status()
         
         data = response.json()
         
-        # La API devuelve el histórico en data['serie']
-        if 'serie' not in data:
-            logger.warning(f"No se encontró 'serie' para {indicator_code}")
+        # Validar que la respuesta tenga la data histórica
+        if 'serie' not in data or not data['serie']:
+            logger.warning(f"Respuesta de API para '{indicator_code}' no contiene 'serie' de datos.")
             return None
-        
-        # Filtrar solo los últimos X días
-        cutoff_date = datetime.now() - timedelta(days=days)
-        
-        historical_values = []
-        for entry in data['serie']:
-            entry_date = datetime.fromisoformat(entry['fecha'].replace('Z', '+00:00'))
             
-            if entry_date >= cutoff_date:
-                historical_values.append({
-                    'fecha': entry['fecha'],
-                    'valor': entry['valor']
-                })
-        
-        logger.info(f"Se obtuvieron {len(historical_values)} registros históricos de '{indicator_code}'")
-        return historical_values
-        
+        logger.info(f"Datos históricos de '{indicator_code}' extraídos exitosamente.")
+        return data
+
+    except requests.exceptions.HTTPError as e:
+        # Si la API devuelve 404 (ej: 'bitcoin' no tiene historial por año)
+        if e.response.status_code == 404:
+            logger.warning(f"API devolvió 404 para '{indicator_code}'. El indicador puede no existir.")
+            return None
+        logger.error(f"Error HTTP para '{indicator_code}': {e.status_code} - {e.response.text}")
+        return None
     except Exception as e:
-        logger.error(f"Error obteniendo histórico de {indicator_code}: {e}", exc_info=True)
+        logger.error(f"Error inesperado en extractor para '{indicator_code}': {e}", exc_info=True)
         return None
-
-
-def fetch_all_indicators_with_history(days=90):
-    """
-    Obtiene todos los indicadores con su histórico.
-    
-    Returns:
-        dict: {
-            'dolar': [{'fecha': '...', 'valor': 950}, ...],
-            'uf': [{'fecha': '...', 'valor': 37500}, ...],
-            ...
-        }
-    """
-    # Primero obtener lista de indicadores disponibles
-    current_indicators = fetch_all_indicators()
-    
-    if not current_indicators:
-        return None
-    
-    all_history = {}
-    
-    # Para cada indicador, obtener su histórico
-    for code in current_indicators.keys():
-        history = fetch_indicator_history(code, days)
-        if history:
-            all_history[code] = history
-    
-    return all_history
-
 
 # --- Bloque de Auto-Test ---
-# Esto se ejecutará solo cuando corras el archivo directamente
-# (ej: python app/services/extractor.py)
 if __name__ == "__main__":
-    print("Probando extractor con histórico...")
     
-    # Probar un solo indicador
-    dolar_history = fetch_indicator_history('dolar', days=30)
+    print("Iniciando prueba del Extractor (histórico)...")
+    code_to_test = 'dolar'
+    extracted_data = fetch_indicator_history(code_to_test)
     
-    if dolar_history:
-        print(f"\n✓ Se obtuvieron {len(dolar_history)} registros del dólar")
-        print("\nPrimeros 3 registros:")
-        for entry in dolar_history[:3]:
-            print(f"  Fecha: {entry['fecha']}, Valor: {entry['valor']}")
+    if extracted_data:
+        print(f"\n[ÉXITO] Se extrajo el historial de '{code_to_test}'.")
+        print(f"Nombre: {extracted_data.get('nombre')}")
+        print(f"Total de registros históricos: {len(extracted_data.get('serie', []))}")
+        
+        print("\n--- Muestra de datos (primer registro) ---")
+        if extracted_data.get('serie'):
+            first_entry = extracted_data['serie'][0]
+            print(f"  Fecha: {first_entry.get('fecha')}")
+            print(f"  Valor: {first_entry.get('valor')}")
     else:
-        print("\n✗ No se pudo obtener el histórico")
+        print(f"\n[FALLO] No se pudo extraer el historial de '{code_to_test}'.")
