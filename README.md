@@ -232,6 +232,7 @@ Este es el flujo que ocurre cuando el frontend (`index.html`) le pide datos al b
 
 La API REST expone los siguientes puntos de acceso. Todos responden con `JSON`.
 
+
 `GET /api/health`
 
 * **Descripción:** Verifica el estado de la API y la conexión a la base de datos. Es ideal para saber si el servidor está encendido.
@@ -256,6 +257,7 @@ La API REST expone los siguientes puntos de acceso. Todos responden con `JSON`.
   "timestamp": "..."
 }
 ```
+
 
 `GET /api/indicators`
 
@@ -285,6 +287,7 @@ La API REST expone los siguientes puntos de acceso. Todos responden con `JSON`.
 ]
 ```
 
+
 `GET /api/indicators/<code>`
 
 * **Descripción:** Obtiene la información de un solo indicador (sin su historial), junto con su último valor.
@@ -312,6 +315,7 @@ La API REST expone los siguientes puntos de acceso. Todos responden con `JSON`.
   "error": "Indicador no encontrado"
 }
 ```
+
 
 `GET /api/indicators/<code>/history`
 
@@ -348,6 +352,7 @@ Ejemplo: `GET /api/indicators/uf/history?days=7`
   "count": 7
 }
 ```
+
 
 `GET /api/stats/latest`
 
