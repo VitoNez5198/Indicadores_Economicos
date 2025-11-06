@@ -57,6 +57,7 @@ El sistema se divide en dos procesos independientes que solo se comunican a trav
 
 ## Estructura del Proyecto
 
+```
 indicadores-economicos-chile/
 ├── backend/
 │   ├── app/
@@ -92,6 +93,7 @@ indicadores-economicos-chile/
 ├── logs/                         # Carpeta donde se guardan los logs (ignorada por .git)
 ├── .gitignore
 └── README.md
+```
 
 ## Instalación y Configuración
 
