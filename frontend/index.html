@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Indicadores Económicos Chile</title>
     <link rel="stylesheet" href="css/styles.css">
-    <!-- Chart.js desde CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 </head>
 <body>
@@ -32,9 +31,10 @@
             <button onclick="location.reload()" class="btn-retry">Reintentar</button>
         </div>
 
-        <!-- Stats Cards Section -->
+
+        <!-- Stats Cards Section (ABAJO, CONTROLES) -->
         <section id="stats-section" class="stats-section hidden">
-            <h2 class="section-title">Últimos Valores</h2>
+            <h2 class="section-title">Indicadores Disponibles</h2>
             <div id="stats-cards" class="stats-grid">
                 <!-- Cards se generan dinámicamente con JS -->
             </div>
@@ -43,42 +43,20 @@
         <!-- Chart Section -->
         <section id="chart-section" class="chart-section hidden">
             <div class="chart-header">
-                <h2 class="section-title">Histórico de Indicadores</h2>
-                <div class="chart-controls">
-                    <select id="indicator-select" class="select">
-                        <option value="">Selecciona un indicador</option>
-                    </select>
-                    <select id="days-select" class="select">
-                        <option value="7">Últimos 7 días</option>
-                        <option value="30" selected>Últimos 30 días</option>
-                        <option value="90">Últimos 90 días</option>
-                    </select>
+                <h2 class="section-title">
+                    <span id="chart-title">Selecciona un indicador</span>
+                </h2>
+                <div class="chart-period-selector">
+                    <button class="period-btn active" data-days="7">7D</button>
+                    <button class="period-btn" data-days="30">30D</button>
+                    <button class="period-btn" data-days="90">90D</button>
                 </div>
             </div>
             <div class="chart-container">
-                <canvas id="main-chart"></canvas>
-            </div>
-        </section>
-
-        <!-- Table Section -->
-        <section id="table-section" class="table-section hidden">
-            <h2 class="section-title">Todos los Indicadores</h2>
-            <div class="table-wrapper">
-                <table id="indicators-table" class="table">
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Nombre</th>
-                            <th>Valor</th>
-                            <th>Unidad</th>
-                            <th>Fecha</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body">
-                        <!-- Rows se generan dinámicamente -->
-                    </tbody>
-                </table>
+                <div class="chart-placeholder">
+                    <p class="chart-placeholder-icon">📈</p>
+                    <p class="chart-placeholder-text">Haz clic en un indicador para ver su histórico</p>
+                </div>
             </div>
         </section>
 
@@ -89,7 +67,7 @@
         <div class="container">
             <p>Datos obtenidos de <a href="https://mindicador.cl" target="_blank">mindicador.cl</a></p>
             <p>Última actualización: <span id="last-update">-</span></p>
-            <p>Hecho con ❤️ por  <a href="https://github.com/VitoNez5198">VitoNez</a></p>
+            <p>Hecho con ❤️ por <a href="https://github.com/VitoNez5198" target="_blank">VitoNez</a></p>
         </div>
     </footer>
 
