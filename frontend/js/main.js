@@ -129,7 +129,7 @@ async function loadIndicatorChart(code) {
     // Actualizar título
     const indicator = allIndicators.find(ind => ind.code === code);
     if (indicator) {
-        document.getElementById('chart-title').textContent = `📊 ${indicator.name}`;
+        document.getElementById('chart-title').textContent = `🪙​ ​​${indicator.name} 🪙​`;
     }
     
     // Mostrar loading en el gráfico
