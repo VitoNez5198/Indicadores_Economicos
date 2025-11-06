@@ -36,21 +36,98 @@ El sistema se divide en dos procesos independientes que solo se comunican a trav
 
 ### Backend & ETL
 
-* Python 3.9+
-* Flask: Framework web para la API REST.
-* SQLAlchemy: ORM para la interacción con la base de datos.
-* psycopg2-binary: Driver de PostgreSQL para Python.
-* Requests: Para consumir la API de mindicador.cl.
-* python-dotenv: Para manejar variables de entorno.
-* gunicorn: Servidor WSGI listo para producción (aunque se use en local).
+* **Python 3.9+**
+* **Flask:** Framework web para la API REST.
+* **SQLAlchemy:** ORM para la interacción con la base de datos.
+* **psycopg2-binary:** Driver de PostgreSQL para Python.
+* **Requests:** Para consumir la API de mindicador.cl.
+* **python-dotenv:** Para manejar variables de entorno.
+* **gunicorn:** Servidor WSGI listo para producción (aunque se use en local).
 
 ### Base de Datos
 
-* PostgreSQL
+* **PostgreSQL**
 
 ### Frontend
 
-* HTML5
-* CSS: Para el diseño y la interfaz de usuario.
-* JavaScript (Vanilla): Para la lógica del cliente (fetch, manejo de eventos).
-* Chart.js: Para la visualización de gráficos históricos.
+* **HTML5**
+* **CSS:** Para el diseño y la interfaz de usuario.
+* **JavaScript (Vanilla):** Para la lógica del cliente (fetch, manejo de eventos).
+* **Chart.js:** Para la visualización de gráficos históricos.
+
+## Estructura del Proyecto
+
+indicadores-economicos-chile/
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   │   └── routes.py         # Endpoints de la API (ej: /api/indicators)
+│   │   ├── models/
+│   │   │   └── indicator.py      # Modelos SQLAlchemy (Indicator, IndicatorValue)
+│   │   ├── services/
+│   │   │   ├── extractor.py    # Lógica para extraer de mindicador.cl
+│   │   │   ├── transformer.py  # Lógica para limpiar los datos
+│   │   │   └── loader.py       # Lógica para cargar datos a la DB
+│   │   ├── utils/
+│   │   │   └── logger.py         # Configuración del logger
+│   │   └── __init__.py           # Factory (create_app, init_db, get_db)
+│   │
+│   ├── etl_job.py                # Script principal para ejecutar el ETL
+│   ├── run.py                    # Script principal para iniciar el servidor API
+│   ├── requirements.txt          # Dependencias de Python
+│   └── .env.example              # Plantilla de variables de entorno
+│
+├── database/
+│   └── __init__.sql              # Script SQL para inicializar tablas y datos maestros
+│
+├── frontend/
+│   ├── index.html                # La aplicación web de una sola página (SPA)
+│   ├── css/
+│   │   └── styles.css
+│   └── js/
+│       ├── api.js
+│       ├── charts.js
+│       └── main.js
+│
+├── logs/                         # Carpeta donde se guardan los logs (ignorada por .git)
+├── .gitignore
+└── README.md
+
+## Instalación y Configuración
+
+Sigue estos pasos para levantar el proyecto en tu máquina local.
+
+### 1. Prerrequisitos
+
+* Tener **Python 3.9+** instalado.
+* Tener **PostgreSQL** instalado y corriendo.
+* Tener **Git** instalado.
+
+### 2. Clonar el Repositorio
+
+```
+git clone [https://github.com/VitoNez5198/indicadores-economicos-chile.git](https://github.com/VitoNez5198/indicadores-economicos-chile.git)
+cd indicadores-economicos-chile
+```
+
+### 3. Configurar el Backend
+
+  1. Navega al backend:
+
+  ```
+  cd backend
+  ```
+
+  2. Crea y activa un entorno virtual:
+
+  ```
+  # Windows
+  python -m venv venv
+  venv\Scripts\activate
+  ```
+
+  3. Instala las dependencias:
+
+  ```
+  pip install -r requirements.txt
+  ```
