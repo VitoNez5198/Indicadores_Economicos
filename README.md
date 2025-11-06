@@ -133,3 +133,45 @@ cd indicadores-economicos-chile
   ```
   pip install -r requirements.txt
   ```
+
+## 4. Configurar la Base de Datos
+
+  1. Abre `psql` (o tu cliente de DB preferido) y crea la base de datos:
+
+```
+  CREATE DATABASE indicadores_db;
+```
+
+  2. Ejecuta el script de inicialización para crear las tablas y cargar los indicadores maestros. (Asegúrate de estar en la carpeta raíz del proyecto).
+
+```
+  psql -U postgres -d indicadores_db -f database/__init__.sql
+```
+
+  Nota: Si tienes problemas de codificación con las tildes (ej. `Dolar observado`), asegúrate de que el archivo `__init__.sql` esté guardado con codificación UTF-8.
+
+## Variables de Entorno
+
+  1. En la carpeta backend/, renombra el archivo .env.example a .env.
+
+  2. Abre el archivo .env y edita los valores (especialmente DB_PASSWORD) con tus credenciales de PostgreSQL.
+
+```
+  # Base de datos
+  DB_HOST=localhost
+  DB_PORT=5432
+  DB_NAME=indicadores_db
+  DB_USER=postgres
+  DB_PASSWORD=tu_password_aqui
+
+  # Flask
+  FLASK_ENV=development
+  FLASK_DEBUG=True
+  SECRET_KEY=dev-secret-key-cambiar-en-produccion
+
+  # APIs externas
+  MINDICADOR_API_URL=[https://mindicador.cl/api](https://mindicador.cl/api)
+
+  # Scheduler
+  ETL_INTERVAL_HOURS=24
+```
