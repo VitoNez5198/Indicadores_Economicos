@@ -211,3 +211,66 @@
 2025-11-05 20:45:10 - run - INFO - URL: http://localhost:5000
 2025-11-05 20:45:10 - run - INFO - Presiona CTRL+C para detener
 2025-11-05 20:45:10 - run - INFO - ==================================================
+2025-11-05 20:56:22 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 20:56:22 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 20:56:22 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 20:56:22 - run - INFO - ==================================================
+2025-11-05 20:56:22 - run - INFO - Iniciando servidor Flask...
+2025-11-05 20:56:22 - run - INFO - URL: http://localhost:5000
+2025-11-05 20:56:22 - run - INFO - Presiona CTRL+C para detener
+2025-11-05 20:56:22 - run - INFO - ==================================================
+2025-11-05 20:56:23 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 20:56:23 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 20:56:23 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 20:56:23 - run - INFO - ==================================================
+2025-11-05 20:56:23 - run - INFO - Iniciando servidor Flask...
+2025-11-05 20:56:23 - run - INFO - URL: http://localhost:5000
+2025-11-05 20:56:23 - run - INFO - Presiona CTRL+C para detener
+2025-11-05 20:56:23 - run - INFO - ==================================================
+2025-11-05 20:59:55 - etl_job - INFO - Creando contexto de aplicación Flask para el ETL...
+2025-11-05 20:59:55 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 20:59:55 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 20:59:55 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 20:59:55 - etl_job - INFO - =============================================
+2025-11-05 20:59:55 - etl_job - INFO - INICIANDO PROCESO ETL DE INDICADORES...
+2025-11-05 20:59:55 - etl_job - INFO - =============================================
+2025-11-05 20:59:55 - etl_job - INFO - --- PASO 1: EXTRACCIÓN ---
+2025-11-05 20:59:55 - extractor - INFO - Iniciando extracción de datos desde: https://mindicador.cl/api
+2025-11-05 20:59:56 - extractor - INFO - Datos extraídos exitosamente.
+2025-11-05 20:59:56 - etl_job - INFO - Extracción exitosa. 12 indicadores recibidos.
+2025-11-05 20:59:56 - etl_job - INFO - --- PASO 2: TRANSFORMACIÓN ---
+2025-11-05 20:59:56 - transformer - INFO - Transformando 12 indicadores...
+2025-11-05 20:59:56 - transformer - INFO - Transformación completada. 12 indicadores listos para cargar.
+2025-11-05 20:59:56 - etl_job - INFO - Transformación exitosa. 12 registros listos.
+2025-11-05 20:59:56 - etl_job - INFO - --- PASO 3: CARGA (LOAD) ---
+2025-11-05 20:59:56 - loader - INFO - Iniciando carga de 12 registros...
+2025-11-05 20:59:56 - loader - WARNING - Indicador 'ivp' no encontrado en la tabla 'indicators'. Saltando.
+2025-11-05 20:59:56 - loader - WARNING - Indicador 'dolar_intercambio' no encontrado en la tabla 'indicators'. Saltando.
+2025-11-05 20:59:56 - loader - WARNING - Indicador 'imacec' no encontrado en la tabla 'indicators'. Saltando.
+2025-11-05 20:59:56 - loader - WARNING - Indicador 'tpm' no encontrado en la tabla 'indicators'. Saltando.
+2025-11-05 20:59:56 - loader - WARNING - Indicador 'libra_cobre' no encontrado en la tabla 'indicators'. Saltando.
+2025-11-05 20:59:56 - loader - WARNING - Indicador 'tasa_desempleo' no encontrado en la tabla 'indicators'. Saltando.
+2025-11-05 20:59:56 - loader - INFO - Carga de datos completada exitosamente.
+2025-11-05 20:59:56 - loader - INFO - Registros nuevos/actualizados: 0
+2025-11-05 20:59:56 - loader - INFO - Registros omitidos (duplicados): 6
+2025-11-05 20:59:56 - loader - INFO - Sesión de base de datos cerrada.
+2025-11-05 20:59:56 - etl_job - INFO - Proceso de carga finalizado.
+2025-11-05 20:59:56 - etl_job - INFO - =============================================
+2025-11-05 20:59:56 - etl_job - INFO - PROCESO ETL FINALIZADO.
+2025-11-05 20:59:56 - etl_job - INFO - =============================================
+2025-11-05 21:00:00 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 21:00:00 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:00:00 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:00:00 - run - INFO - ==================================================
+2025-11-05 21:00:00 - run - INFO - Iniciando servidor Flask...
+2025-11-05 21:00:00 - run - INFO - URL: http://localhost:5000
+2025-11-05 21:00:00 - run - INFO - Presiona CTRL+C para detener
+2025-11-05 21:00:00 - run - INFO - ==================================================
+2025-11-05 21:00:01 - app - INFO - ✓ Conexión a PostgreSQL exitosa
+2025-11-05 21:00:01 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:00:01 - app - INFO - ✓ Aplicación Flask inicializada
+2025-11-05 21:00:01 - run - INFO - ==================================================
+2025-11-05 21:00:01 - run - INFO - Iniciando servidor Flask...
+2025-11-05 21:00:01 - run - INFO - URL: http://localhost:5000
+2025-11-05 21:00:01 - run - INFO - Presiona CTRL+C para detener
+2025-11-05 21:00:01 - run - INFO - ==================================================
