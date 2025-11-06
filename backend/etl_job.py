@@ -2,61 +2,83 @@ import sys
 import os
 
 # Añadir el directorio 'app' al path de Python
-# Esto es necesario para que el script (etl_job.py) pueda encontrar
-# los módulos 'app.services', 'app.models', etc.,
-# al ser ejecutado directamente desde la carpeta 'backend'.
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
-from app import create_app, get_db
-from app.services.extractor import fetch_all_indicators
-from app.services.transformer import transform_data
+from app import create_app
+# Importamos las funciones SIMPLES
+from app.services.extractor import fetch_indicator_history
+from app.services.transformer import transform_historical_data
 from app.services.loader import load_data
 from app.utils.logger import setup_logger
 
-# Configurar logger para este módulo
 logger = setup_logger('etl_job')
+
+# LISTA DE INDICADORES QUE QUEREMOS PROCESAR
+# (Estos deben coincidir con los 'code' en tu tabla 'indicators')
+INDICATORS_TO_PROCESS = [
+    'dolar',
+    'uf',
+    'euro',
+    'utm',
+    'ipc',
+    'bitcoin'
+]
 
 def run_etl():
     """
     Orquesta el proceso completo de ETL:
-    1. Extrae datos de la API.
-    2. Transforma los datos.
-    3. Carga los datos en la base de datos.
+    Itera sobre cada indicador, extrae su historial,
+    lo transforma y lo carga en la DB.
     """
     logger.info("=============================================")
-    logger.info("INICIANDO PROCESO ETL DE INDICADORES...")
+    logger.info("INICIANDO PROCESO ETL HISTÓRICO...")
+    logger.info(f"Se procesarán {len(INDICATORS_TO_PROCESS)} indicadores.")
     logger.info("=============================================")
 
-    # Paso 1: Extraer
-    logger.info("--- PASO 1: EXTRACCIÓN ---")
-    raw_data = fetch_all_indicators()
-    
-    if not raw_data:
-        logger.error("Extracción fallida. Abortando ETL.")
-        return
+    total_records_loaded = 0
+    total_records_failed = 0
 
-    logger.info(f"Extracción exitosa. {len(raw_data)} indicadores recibidos.")
-
-    # Paso 2: Transformar
-    logger.info("--- PASO 2: TRANSFORMACIÓN ---")
-    clean_data = transform_data(raw_data)
-    
-    if not clean_data:
-        logger.error("Transformación fallida o no generó datos. Abortando ETL.")
-        return
+    # Bucle principal: 1 indicador a la vez
+    for indicator_code in INDICATORS_TO_PROCESS:
         
-    logger.info(f"Transformación exitosa. {len(clean_data)} registros listos.")
+        logger.info(f"--- Procesando: {indicator_code.upper()} ---")
 
-    # Paso 3: Cargar
-    logger.info("--- PASO 3: CARGA (LOAD) ---")
-    try:
-        load_data(clean_data)
-        logger.info("Proceso de carga finalizado.")
-    except Exception as e:
-        logger.error(f"Error crítico durante la fase de carga: {e}", exc_info=True)
+        # Paso 1: Extraer
+        # Llama a la función simple
+        raw_data = fetch_indicator_history(indicator_code)
         
+        if not raw_data:
+            logger.error(f"Extracción fallida para '{indicator_code}'. Saltando al siguiente.")
+            total_records_failed += 1
+            continue
+
+        # Paso 2: Transformar
+        # Llama a la función simple
+        clean_data = transform_historical_data(raw_data)
+        
+        if not clean_data:
+            logger.error(f"Transformación fallida para '{indicator_code}'. Saltando al siguiente.")
+            total_records_failed += 1
+            continue
+            
+        # Paso 3: Cargar
+        # El loader.py no necesita cambios, ¡recibirá los datos!
+        try:
+            # El loader SÍ necesita el contexto de la app
+            # (El loader nos dirá cuántos cargó, cuántos omitió)
+            load_data(clean_data)
+            total_records_loaded += len(clean_data) # Esto es aprox, el loader es más exacto
+            logger.info(f"Proceso de carga finalizado para '{indicator_code}'.")
+        except Exception as e:
+            logger.error(f"Error crítico durante la fase de carga de '{indicator_code}': {e}", exc_info=True)
+            total_records_failed += 1
+            
+        logger.info(f"--- Fin de {indicator_code.upper()} ---")
+
     logger.info("=============================================")
-    logger.info("PROCESO ETL FINALIZADO.")
+    logger.info("PROCESO ETL HISTÓRICO FINALIZADO.")
+    logger.info(f"Total de indicadores procesados con éxito (aprox): {len(INDICATORS_TO_PROCESS) - total_records_failed}")
+    logger.info(f"Total de indicadores fallidos: {total_records_failed}")
     logger.info("=============================================")
 
 # --- Punto de entrada principal ---
@@ -64,12 +86,7 @@ if __name__ == "__main__":
     
     logger.info("Creando contexto de aplicación Flask para el ETL...")
     
-    # Creamos una instancia de la app para tener el contexto
     app = create_app()
     
-    # 'app_context()' es VITAL.
-    # Empuja el contexto de la aplicación para que get_db()
-    # y SQLAlchemy sepan a qué base de datos conectarse.
     with app.app_context():
-        # Ahora que estamos "dentro" de la app, ejecutamos el ETL
         run_etl()
