@@ -4,5 +4,4 @@ SQLAlchemy==2.0.35
 psycopg2-binary
 python-dotenv==1.0.0
 requests==2.31.0
-APScheduler==3.10.4
 gunicorn
