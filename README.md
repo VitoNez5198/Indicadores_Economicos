@@ -175,3 +175,199 @@ cd indicadores-economicos-chile
   # Scheduler
   ETL_INTERVAL_HOURS=24
 ```
+
+## Cómo Ejecutar el Proyecto
+
+Debes tener dos terminales abiertas en la carpeta backend/ (ambas con el entorno virtual venv activado).
+
+### Terminal 1: Iniciar el Servidor API
+
+Este servidor debe estar siempre encendido para que el frontend funcione.
+
+```
+# (venv) .../backend>
+python run.py
+```
+
+* Verás logs indicando que el servidor Flask está corriendo en http://127.0.0.1:5000.
+
+* Puedes probar que funciona abriendo `http://127.0.0.1:5000/api/health` en tu navegador. Deberías ver un JSON con `{"status": "healthy"}`.
+
+### Terminal 2: Ejecutar el Proceso ETL
+
+Este script se ejecuta una sola vez para poblar la base de datos. Si la base de datos está vacía, cargará miles de registros (puede tomar 30-60 segundos).
+
+```
+# (venv) .../backend>
+python etl_job.py
+```
+
+* Verás los logs del `extractor`, `transformer` y `loader` trabajando.
+
+* Cuando termine, tu base de datos estará llena con todo el historial.
+
+* Vuelve a ejecutar este comando en cualquier momento (ej. al día siguiente) para cargar solo los datos más nuevos (el `loader` omitirá los duplicados).
+
+### Paso 3: Abrir el Frontend
+
+  1. Navega a la carpeta `frontend/`.
+
+  2. Abre el archivo `index.html` directamente en tu navegador (Google Chrome, Firefox, etc.).
+
+  3. ¡El panel de control debería aparecer, conectarse a tu API en `localhost:5000` y mostrar los datos y gráficos!
+
+## Flujo del ETL (Proceso de Ingesta)
+
+Este es el proceso que se ejecuta con `python etl_job.py` para obtener y guardar los datos.
+
+`insertar diagrama de flujo etl`
+
+## Flujo de la API (Proceso de Consulta)
+
+Este es el flujo que ocurre cuando el frontend (`index.html`) le pide datos al backend (`run.py`).
+
+`insertar diagrama de flujo de la api`
+
+## Endpoints de la API
+
+La API REST expone los siguientes puntos de acceso. Todos responden con `JSON`.
+
+`GET /api/health`
+
+* **Descripción:** Verifica el estado de la API y la conexión a la base de datos. Es ideal para saber si el servidor está encendido.
+
+* **Respuesta Exitosa (200):**
+
+```
+{
+  "status": "healthy",
+  "database": "connected",
+  "timestamp": "2025-11-06T17:30:00.123456"
+}
+```
+
+
+* **Respuesta Fallida (500):**
+
+```
+{
+  "status": "unhealthy",
+  "error": "...",
+  "timestamp": "..."
+}
+```
+
+`GET /api/indicators`
+
+* **Descripción:** Obtiene la lista de todos los indicadores maestros (los 6 de `database/__init__.sql`) junto con su último valor registrado en la base de datos (usando la vista `latest_indicators`).
+
+* **Respuesta Exitosa (200):**
+
+```
+[
+  {
+    "id": 1,
+    "code": "dolar",
+    "name": "Dolar observado",
+    "unit": "CLP",
+    "latest_value": 945.13,
+    "latest_date": "2025-11-05"
+  },
+  {
+    "id": 2,
+    "code": "uf",
+    "name": "Unidad de Fomento (UF)",
+    "unit": "CLP",
+    "latest_value": 39623.18,
+    "latest_date": "2025-11-05"
+  }
+  // ... 4 indicadores más
+]
+```
+
+`GET /api/indicators/<code>`
+
+* **Descripción:** Obtiene la información de un solo indicador (sin su historial), junto con su último valor.
+
+* **Ejemplo:** `GET /api/indicators/dolar`
+
+* **Respuesta Exitosa (200):**
+
+```
+{
+  "id": 1,
+  "code": "dolar",
+  "name": "Dolar observado",
+  "unit": "CLP",
+  "latest_value": 945.13,
+  "latest_date": "2025-11-05"
+}
+```
+
+
+* **Respuesta Fallida (404):**
+
+```
+{
+  "error": "Indicador no encontrado"
+}
+```
+
+`GET /api/indicators/<code>/history`
+
+* **Descripción:** Obtiene el historial de valores para un indicador específico, filtrado por un rango de días.
+
+* **Parámetros de Query (Opcionales):**
+
+  * `days` (int): El número de días de historial hacia atrás desde hoy. (Ej: `days=30`). **Default: 30.**
+
+  * `limit` (int): Limita el número de registros devueltos. **Default: 100.**
+
+Ejemplo: `GET /api/indicators/uf/history?days=7`
+
+* **Respuesta Exitosa (200):**
+
+```
+{
+  "indicator": {
+    "code": "uf",
+    "name": "Unidad de Fomento (UF)",
+    "unit": "CLP"
+  },
+  "values": [
+    {
+      "value": 39623.18,
+      "date": "2025-11-05"
+    },
+    {
+      "value": 39620.00,
+      "date": "2025-11-04"
+    }
+    // ... 5 valores más
+  ],
+  "count": 7
+}
+```
+
+`GET /api/stats/latest`
+
+* **Descripción:** Obtiene un objeto con los últimos valores de todos los indicadores, similar a `/api/indicators` pero envuelto en un objeto con metadata.
+
+* **Respuesta Exitosa (200):**
+
+```
+{
+  "timestamp": "2025-11-06T17:40:00.123456",
+  "indicators": [
+    {
+      "code": "dolar",
+      "name": "Dolar observado",
+      "unit": "CLP",
+      "value": 945.13,
+      "date": "2025-11-05"
+    }
+    // ... 5 indicadores más
+  ],
+  "count": 6
+}
+```
