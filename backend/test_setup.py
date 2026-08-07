@@ -5,8 +5,7 @@ def test_config():
     """Probar que la configuración funciona"""
     logger = setup_logger('test')
     
-    logger.info("=== Probando Configuración ===")
-    logger.info(f"Database URI: {Config.SQLALCHEMY_DATABASE_URI}")
+    logger.info(f"Database Target: postgresql://{Config.DB_USER}:***@{Config.DB_HOST}:{Config.DB_PORT}/{Config.DB_NAME}")
     logger.info(f"API URL: {Config.MINDICADOR_API_URL}")
     logger.info(f"Debug Mode: {Config.DEBUG}")
     logger.info("✓ Configuración OK")

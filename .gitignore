@@ -21,6 +21,7 @@ __pycache__/
 
 # Logs
 logs/
+**/logs/
 *.log
 
 # Database
