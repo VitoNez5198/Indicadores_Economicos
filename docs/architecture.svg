@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" role="img" aria-label="Arquitectura del Pipeline ETL y API REST de Indicadores Economicos">
+  <defs>
+    <style>
+      .diag-bg { fill: #111720; }
+      .diag-zone { fill: rgba(148, 163, 184, 0.03); stroke: rgba(148, 163, 184, 0.28); stroke-width: 1.1; stroke-dasharray: 4 3; }
+      .diag-zone-label { fill: #94a3b8; font-family: 'Fira Code', Consolas, monospace; font-size: 9px; font-weight: 600; }
+      .diag-box { fill: #17202c; stroke: rgba(148, 163, 184, 0.35); stroke-width: 1.3; }
+      .diag-box-accent { fill: rgba(91, 164, 245, 0.12); stroke: #5ba4f5; stroke-width: 1.3; }
+      .diag-box-ok { fill: rgba(52, 211, 153, 0.10); stroke: #34d399; stroke-width: 1.3; }
+      .diag-label { fill: #f0f6fc; font-family: 'Fira Code', Consolas, monospace; font-size: 10.5px; font-weight: 600; text-anchor: middle; }
+      .diag-sub { fill: #94a3b8; font-family: 'Fira Code', Consolas, monospace; font-size: 8.5px; text-anchor: middle; }
+      .diag-edge { fill: #94a3b8; font-family: 'Fira Code', Consolas, monospace; font-size: 8px; }
+      .diag-line { fill: none; stroke: #94a3b8; stroke-width: 1.25; }
+      .diag-line-dashed { fill: none; stroke: #5ba4f5; stroke-width: 1.25; stroke-dasharray: 4 3; }
+      .diag-arrow { fill: #94a3b8; }
+      .diag-arrow-accent { fill: #5ba4f5; }
+    </style>
+    <marker id="arr-etl" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path class="diag-arrow" d="M 0 1 L 10 5 L 0 9 z" />
+    </marker>
+    <marker id="arr-etl-acc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path class="diag-arrow-accent" d="M 0 1 L 10 5 L 0 9 z" />
+    </marker>
+  </defs>
+
+  <rect class="diag-bg" x="0" y="0" width="640" height="300" rx="8" />
+
+  <!-- Fuente Externa -->
+  <rect class="diag-box" x="16" y="64" width="104" height="52" rx="6" />
+  <text class="diag-label" x="68" y="87">mindicador.cl</text>
+  <text class="diag-sub" x="68" y="102">API Pública JSON</text>
+
+  <!-- Zona Sistema Desacoplado -->
+  <rect class="diag-zone" x="138" y="18" width="364" height="264" rx="8" />
+  <text class="diag-zone-label" x="150" y="35">Sistema Desacoplado (Python · PostgreSQL)</text>
+
+  <rect class="diag-box-accent" x="154" y="64" width="142" height="52" rx="6" />
+  <text class="diag-label" x="225" y="87">Proceso ETL</text>
+  <text class="diag-sub" x="225" y="102">Extract · Transform</text>
+
+  <rect class="diag-box-ok" x="340" y="64" width="146" height="52" rx="6" />
+  <text class="diag-label" x="413" y="87">PostgreSQL</text>
+  <text class="diag-sub" x="413" y="102">Loader Upsert SQL</text>
+
+  <rect class="diag-box" x="154" y="188" width="142" height="52" rx="6" />
+  <text class="diag-label" x="225" y="211">Config &amp; Logs</text>
+  <text class="diag-sub" x="225" y="226">.env · Logger</text>
+
+  <rect class="diag-box-accent" x="340" y="188" width="146" height="52" rx="6" />
+  <text class="diag-label" x="413" y="211">API REST (Flask)</text>
+  <text class="diag-sub" x="413" y="226">SQLAlchemy · /api/*</text>
+
+  <!-- Cliente Externo -->
+  <rect class="diag-box" x="522" y="188" width="102" height="52" rx="6" />
+  <text class="diag-label" x="573" y="211">Cliente / SPA</text>
+  <text class="diag-sub" x="573" y="226">REST · Chart.js</text>
+
+  <!-- Flechas principales -->
+  <line class="diag-line" x1="120" y1="90" x2="150" y2="90" marker-end="url(#arr-etl)" />
+
+  <line class="diag-line" x1="296" y1="90" x2="336" y2="90" marker-end="url(#arr-etl)" />
+  <text class="diag-edge" x="301" y="83">Upsert</text>
+
+  <line class="diag-line" x1="413" y1="116" x2="413" y2="184" marker-end="url(#arr-etl)" />
+  <text class="diag-edge" x="420" y="154">SELECT</text>
+
+  <line class="diag-line" x1="486" y1="214" x2="518" y2="214" marker-end="url(#arr-etl)" />
+  <text class="diag-edge" x="492" y="207">JSON</text>
+
+  <!-- Flechas configuracion -->
+  <line class="diag-line-dashed" x1="225" y1="188" x2="225" y2="120" marker-end="url(#arr-etl-acc)" />
+  <line class="diag-line-dashed" x1="296" y1="214" x2="336" y2="214" marker-end="url(#arr-etl-acc)" />
+</svg>
